@@ -1,5 +1,5 @@
 # voting-dapp
-<<<<<<< HEAD
+HEAD
 a voting dapp using solana
 =======
 
