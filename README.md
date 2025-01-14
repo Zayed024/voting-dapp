@@ -1,7 +1,6 @@
 # voting-dapp
-HEAD
-a voting dapp using solana
-=======
+ A voting dapp using solana
+
 
 ## Getting Started
 
