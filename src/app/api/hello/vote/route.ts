@@ -60,7 +60,8 @@ export async function POST(request: Request) {
     return new Response("Invalid candidate", { status: 400, headers: ACTIONS_CORS_HEADERS });
   }
 
-  const connection = new Connection("http://127.0.0.1:8899", "confirmed");
+  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+
   const program: Program<Voting> = new Program(IDL, {connection});
 
   const body: ActionPostRequest = await request.json(); 

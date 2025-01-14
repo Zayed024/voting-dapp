@@ -12,8 +12,9 @@ votingdapp = "6uaHTsTcLBMnDSy5z6eqZpPbUspMvoeA1fhCxLnCTMnu"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "http://127.0.0.1:8898"
+cluster = "https://api.devnet.solana.com"
 wallet = "~/.config/solana/id.json"
+
 
 [scripts]
 test = "../node_modules/.bin/jest --preset ts-jest"
