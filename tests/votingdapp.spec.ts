@@ -6,9 +6,9 @@ import { Voting } from '../target/types/voting';
 import { startAnchor } from "solana-bankrun";
 import { BankrunProvider } from "anchor-bankrun";
 
-const IDL = require('../target/idl/voting.json');
+const IDL = require('../target/idl/votingdapp.json');
 
-const votingAddress = new PublicKey("6uaHTsTcLBMnDSy5z6eqZpPbUspMvoeA1fhCxLnCTMnu");
+const votingAddress = new PublicKey("7rJLfmDxYTEoCjURe96CEkfMnmf7W3UzW5mDiwqv9mJJ");
 
 describe('Voting', () => {
 

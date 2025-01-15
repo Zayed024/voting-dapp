@@ -6,14 +6,17 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-votingdapp = "6uaHTsTcLBMnDSy5z6eqZpPbUspMvoeA1fhCxLnCTMnu"
+votingdapp = "7rJLfmDxYTEoCjURe96CEkfMnmf7W3UzW5mDiwqv9mJJ"
+
+[programs.devnet]
+votingdapp = "7rJLfmDxYTEoCjURe96CEkfMnmf7W3UzW5mDiwqv9mJJ"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
 cluster = "https://api.devnet.solana.com"
-wallet = "~/.config/solana/id.json"
+wallet = "~/voting/voting-dapp/anchor/deploy_keypair.json"
 
 
 [scripts]
