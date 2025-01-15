@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -6,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.yarn
 
 # testing
 /coverage
@@ -36,18 +36,20 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 tmp
-test-ledger/
-=======
+
+# anchor
 .anchor
-.DS_Store
+
+# target directories
 target/debug
 target/deploy
 target/release
 target/sbf-solana-solana
 target/test-ledger
 target/.rustc_info.json
+
+# rust backup files
 **/*.rs.bk
-node_modules
+
+# test ledger
 test-ledger
-.yarn
->>>>>>> 6548d13 (Updated code for voting-dapp with latest changes)
