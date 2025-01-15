@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -36,3 +37,17 @@ yarn-error.log*
 next-env.d.ts
 tmp
 test-ledger/
+=======
+.anchor
+.DS_Store
+target/debug
+target/deploy
+target/release
+target/sbf-solana-solana
+target/test-ledger
+target/.rustc_info.json
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+>>>>>>> 6548d13 (Updated code for voting-dapp with latest changes)

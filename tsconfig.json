@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["jest", "node"],
@@ -27,4 +28,7 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.spec.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
+=======
+  "extends": "../tsconfig.json"
+>>>>>>> 6548d13 (Updated code for voting-dapp with latest changes)
 }
