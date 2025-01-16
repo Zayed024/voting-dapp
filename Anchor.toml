@@ -20,7 +20,8 @@ wallet = "~/.config/solana/id.json"
 
 
 [scripts]
-test = "pnpm jest --preset ts-jest"
+test = "jest --preset ts-jest"
+
 
 
 [test]
