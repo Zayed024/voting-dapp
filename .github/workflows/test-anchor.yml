@@ -26,10 +26,14 @@ jobs:
           cache: 'pnpm'
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm add jest ts-jest @types/jest --save-dev
+          pnpm add solana-bankrun --save-dev
 
-      - name: Install Jest (if missing)
-        run: pnpm add jest --save-dev
+      - name: Remove Duplicate package.json Files
+        run: |
+          find . -type f -name "package.json" -not -path "./package.json" -exec rm -f {} +
 
       - name: Install Anchor and Solana CLI
         uses: metadaoproject/setup-anchor@v2
