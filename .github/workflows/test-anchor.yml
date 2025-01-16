@@ -68,6 +68,9 @@ jobs:
           # Use explicit Jest binary path
           pnpm exec jest --preset ts-jest
         shell: bash
+        env:
+          ANCHOR_PROVIDER_URL: https://api.devnet.solana.com
+          ANCHOR_WALLET: /home/runner/.config/solana/id.json
 
       - name: Deploy Program to Devnet
         run: anchor deploy
