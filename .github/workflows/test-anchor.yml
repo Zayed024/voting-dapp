@@ -29,11 +29,11 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpm add jest ts-jest @types/jest --save-dev
-          pnpm add solana-bankrun --save-dev
 
-      - name: Remove Duplicate package.json Files
+      - name: Clean Old Cache and Build Files
         run: |
-          find . -type f -name "package.json" -not -path "./package.json" -exec rm -f {} +
+          rm -rf node_modules
+          pnpm install --frozen-lockfile
 
       - name: Install Anchor and Solana CLI
         uses: metadaoproject/setup-anchor@v2
@@ -58,7 +58,9 @@ jobs:
         shell: bash
 
       - name: Test Anchor
-        run: anchor test
+        run: |
+          # Use explicit Jest binary path
+          pnpm exec jest --preset ts-jest
         shell: bash
 
       - name: Deploy Program to Devnet
