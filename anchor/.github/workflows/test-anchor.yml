@@ -1,0 +1,59 @@
+name: Test, Build, and Deploy Anchor
+
+on:
+  pull_request:
+  push:
+    branches: [ 'main' ]
+
+jobs:
+  test-build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Anchor and Solana CLI
+        uses: metadaoproject/setup-anchor@v2
+        with:
+          anchor-version: '0.30.1'
+          node-version: '20'
+          solana-cli-version: '1.18.9'
+
+      - name: Save Solana Keypair from Secret
+        run: |
+          echo "${{ secrets.SOLANA_KEYPAIR }}" > /home/runner/.config/solana/id.json
+          chmod 600 /home/runner/.config/solana/id.json
+
+      - name: Set Solana Target Cluster to Devnet
+        run: solana config set --url https://api.devnet.solana.com
+
+      - name: Check Solana Config
+        run: solana config get
+
+      - name: Build Anchor
+        run: anchor build
+        shell: bash
+
+      - name: Test Anchor
+        run: anchor test
+        shell: bash
+
+      - name: Deploy Program to Devnet
+        run: anchor deploy
+        shell: bash
