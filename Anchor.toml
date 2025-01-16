@@ -20,7 +20,8 @@ wallet = "~/.config/solana/id.json"
 
 
 [scripts]
-test = "jest"
+test = "pnpm jest --preset ts-jest"
+
 
 [test]
 startup_wait = 5000
