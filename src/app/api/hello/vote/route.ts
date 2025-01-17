@@ -28,8 +28,8 @@ export async function GET(request: NextRequest) {
   label: "Vote",
   links: {
   actions: [
-    { type: "POST", label: "Vote for Trump", href: "/api/hello/vote?candidate=Trump" },
-    { type: "POST", label: "Vote for Biden", href: "/api/hello/vote?candidate=Biden" },
+    { type: "post", label: "Vote for Trump", href: "/api/hello/vote?candidate=Trump" },
+    { type: "post", label: "Vote for Biden", href: "/api/hello/vote?candidate=Biden" },
   ],
 },
 };
