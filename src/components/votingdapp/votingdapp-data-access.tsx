@@ -37,12 +37,13 @@ export function useVotingdappProgram() {
   mutationFn: async (params: { pollId: number; description: string; pollStart: number; pollEnd: number }) => {
     const { pollId, description, pollStart, pollEnd } = params;
 
-    // Derive the poll PDA using the pollId as the seed
+    // Derive the poll PDA
     const [pollPDA] = await PublicKey.findProgramAddress(
-      [Buffer.from("poll"), new BN(pollId).toArrayLike(Buffer, "be", 8)], // Seed structure
+      [new BN(pollId).toArrayLike(Buffer, "be", 8)], // Convert pollId to buffer
       program.programId
     );
 
+    // Call the Anchor method
     return program.methods
       .initializePoll(
         new BN(pollId), // Convert to BN
@@ -51,18 +52,20 @@ export function useVotingdappProgram() {
         new BN(pollEnd) // Convert to BN
       )
       .accounts({
-        Poll: pollPDA, // Use the derived PDA here
-        signer: provider.wallet.publicKey,
-        systemProgram: PublicKey.default, // Add systemProgram if required in IDL
+        poll: pollPDA, // Use the derived PDA
+        signer: provider.wallet.publicKey, // Wallet signer
+        systemProgram: PublicKey.default, // System program
       })
       .rpc();
   },
   onSuccess: (signature) => {
     transactionToast(signature);
-    return polls.refetch();
+    return polls.refetch(); // Ensure poll list is updated
   },
   onError: () => toast.error('Failed to initialize poll'),
 });
+
+
   // Initialize a new candidate
   const initializeCandidate = useMutation({
     mutationKey: ['Candidate', 'initialize', { cluster }],
