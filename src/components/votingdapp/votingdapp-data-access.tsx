@@ -31,7 +31,7 @@ export function useVotingdappProgram() {
   })
 
   const initialize = useMutation({
-    mutationKey: ['votingdapp', 'initialize', { cluster }],
+    mutationKey: ['Poll', 'initialize', { cluster }],
     mutationFn: (keypair: Keypair) =>
       program.methods.initialize().accounts({ votingdapp: keypair.publicKey }).signers([keypair]).rpc(),
     onSuccess: (signature) => {
