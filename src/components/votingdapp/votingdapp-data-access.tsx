@@ -33,7 +33,7 @@ export function useVotingdappProgram() {
   const initialize = useMutation({
     mutationKey: ['Poll', 'initialize', { cluster }],
     mutationFn: (keypair: Keypair) =>
-      program.methods.initialize().accounts({ votingdapp: keypair.publicKey }).signers([keypair]).rpc(),
+      program.methods.initialize().accounts({ Poll: keypair.publicKey }).signers([keypair]).rpc(),
     onSuccess: (signature) => {
       transactionToast(signature)
       return accounts.refetch()
