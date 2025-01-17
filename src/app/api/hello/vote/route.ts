@@ -45,14 +45,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json("Invalid candidate", { status: 400, headers: ACTIONS_CORS_HEADERS });
   }
 
-  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+  const connection = new Connection("https://api.devnet.solana.com", "confirmed");
   const wallet = AnchorProvider.local().wallet; // Replace with actual wallet implementation
   const provider = new AnchorProvider(connection, wallet, {});
 
   // Fix: Correctly use the provider and program ID
   const programId = new PublicKey(IDL.metadata.address); // Ensure program ID is a PublicKey
-  const program = new Program<Votingdapp>(IDL, IDL.metadata.address, provider); // Use provider as the third argument
-
+  
+  
+  const program: Program<Votingdapp> = new Program(IDL, {connection});
+  
   const body: ActionPostRequest = await request.json();
   let voter;
 
