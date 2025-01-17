@@ -2,7 +2,7 @@
 
 
 
-import { getVotingdappProgram, getVotingdappProgramId } from '../../votingdapp-exports'
+import { getVotingdappProgram, getVotingdappProgramId } from '@voting-dapp/anchor'
 import { useConnection } from '@solana/wallet-adapter-react'
 import { Cluster, Keypair, PublicKey } from '@solana/web3.js'
 import { useMutation, useQuery } from '@tanstack/react-query'
