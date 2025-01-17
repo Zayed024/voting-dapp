@@ -1,6 +1,7 @@
 'use client'
 
-import { getVotingdappProgram, getVotingdappProgramId } from '@project/anchor'
+
+import { getVotingdappProgram, getVotingdappProgramId } from '../../../anchor/target/idl/votingdapp.json'
 import { useConnection } from '@solana/wallet-adapter-react'
 import { Cluster, Keypair, PublicKey } from '@solana/web3.js'
 import { useMutation, useQuery } from '@tanstack/react-query'
