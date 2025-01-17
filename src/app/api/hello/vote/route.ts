@@ -79,6 +79,7 @@ export async function POST(request: NextRequest) {
   const response = await createPostResponse({
     fields: {
       transaction: transaction,
+      type: "Transaction",
     },
   });
 
