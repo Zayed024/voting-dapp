@@ -32,11 +32,17 @@ export function useVotingdappProgram() {
   });
 
   // Initialize a new poll
-  const initializePoll = useMutation({
+ const initializePoll = useMutation({
   mutationKey: ['Poll', 'initialize', { cluster }],
-  mutationFn: (params: { pollId: number; description: string; pollStart: number; pollEnd: number }) => {
+  mutationFn: async (params: { pollId: number; description: string; pollStart: number; pollEnd: number }) => {
     const { pollId, description, pollStart, pollEnd } = params;
-    const pollKeypair = Keypair.generate();
+
+    // Derive the poll PDA using the pollId as the seed
+    const [pollPDA] = await PublicKey.findProgramAddress(
+      [Buffer.from("poll"), new BN(pollId).toArrayLike(Buffer, "be", 8)], // Seed structure
+      program.programId
+    );
+
     return program.methods
       .initializePoll(
         new BN(pollId), // Convert to BN
@@ -44,8 +50,11 @@ export function useVotingdappProgram() {
         new BN(pollStart), // Convert to BN
         new BN(pollEnd) // Convert to BN
       )
-      .accounts({ poll: pollKeypair.publicKey, signer: provider.wallet.publicKey })
-      .signers([pollKeypair])
+      .accounts({
+        poll: pollPDA, // Use the derived PDA here
+        signer: provider.wallet.publicKey,
+        systemProgram: PublicKey.default, // Add systemProgram if required in IDL
+      })
       .rpc();
   },
   onSuccess: (signature) => {
@@ -54,7 +63,6 @@ export function useVotingdappProgram() {
   },
   onError: () => toast.error('Failed to initialize poll'),
 });
-
   // Initialize a new candidate
   const initializeCandidate = useMutation({
     mutationKey: ['Candidate', 'initialize', { cluster }],
