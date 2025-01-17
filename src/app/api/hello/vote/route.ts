@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
   // Fix: Correctly use the provider and program ID
   const programId = new PublicKey(IDL.metadata.address); // Ensure program ID is a PublicKey
-  const program = new Program<Votingdapp>(IDL, programId.toString(), provider); // Use provider as the third argument
+  const program = new Program<Votingdapp>(IDL, IDL.metadata.address, provider); // Use provider as the third argument
 
   const body: ActionPostRequest = await request.json();
   let voter;
