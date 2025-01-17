@@ -21,8 +21,8 @@ export function useVotingdappProgram() {
   const program = useMemo(() => getVotingdappProgram(provider, programId), [provider, programId])
 
   const accounts = useQuery({
-    queryKey: ['votingdapp', 'all', { cluster }],
-    queryFn: () => program.account.votingdapp.all(),
+    queryKey: ['Votingdapp', 'all', { cluster }],
+    queryFn: () => program.account.Votingdapp.all(),
   })
 
   const getProgramAccount = useQuery({
@@ -56,8 +56,8 @@ export function useVotingdappProgramAccount({ account }: { account: PublicKey })
   const { program, accounts } = useVotingdappProgram()
 
   const accountQuery = useQuery({
-    queryKey: ['votingdapp', 'fetch', { cluster, account }],
-    queryFn: () => program.account.votingdapp.fetch(account),
+    queryKey: ['Votingdapp', 'fetch', { cluster, account }],
+    queryFn: () => program.account.Votingdapp.fetch(account),
   })
 
   const closeMutation = useMutation({
