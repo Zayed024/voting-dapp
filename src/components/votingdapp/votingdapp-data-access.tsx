@@ -21,8 +21,8 @@ export function useVotingdappProgram() {
   const program = useMemo(() => getVotingdappProgram(provider, programId), [provider, programId])
 
   const accounts = useQuery({
-    queryKey: ['Votingdapp', 'all', { cluster }],
-    queryFn: () => program.account.Votingdapp.all(),
+    queryKey: ['Poll', 'all', { cluster }],
+    queryFn: () => program.account.poll.all(),
   })
 
   const getProgramAccount = useQuery({
