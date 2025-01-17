@@ -1,7 +1,9 @@
-/** @type {import('next').NextConfig} */
+// next.config.mjs
 const nextConfig = {
   experimental: {
-    outputFileTracing: true,
+    outputFileTracingIncludes: {
+      "anchor/target/idl/voting.json": true,
+    },
   },
 };
 
