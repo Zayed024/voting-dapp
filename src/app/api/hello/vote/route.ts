@@ -49,9 +49,9 @@ export async function POST(request: NextRequest) {
   const wallet = AnchorProvider.local().wallet; // Replace with actual wallet implementation
   const provider = new AnchorProvider(connection, wallet, {});
 
-  // Fix: Correctly initialize the `Program` with a `PublicKey` for the program ID
-  const programId = new PublicKey(IDL.metadata.address);
-  const program = new Program<Votingdapp>(IDL, programId, provider);
+  // Fix: Correctly use the provider and program ID
+  const programId = new PublicKey(IDL.metadata.address); // Ensure program ID is a PublicKey
+  const program = new Program<Votingdapp>(IDL, programId.toString(), provider); // Use provider as the third argument
 
   const body: ActionPostRequest = await request.json();
   let voter;
