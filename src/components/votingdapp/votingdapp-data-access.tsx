@@ -52,7 +52,7 @@ export function useVotingdappProgram() {
         new BN(pollEnd) // Convert to BN
       )
       .accounts({
-        polls: pollPDA, // Use the derived PDA
+        poll: pollPDA, // Use the derived PDA
         signer: provider.wallet.publicKey, // Wallet signer
         systemProgram: PublicKey.default, // System program
       })
