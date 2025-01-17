@@ -1,10 +1,12 @@
 // next.config.mjs
 const nextConfig = {
-  experimental: {
-    outputFileTracingIncludes: [
-      "anchor/target/idl/votingdapp.json",
-    ],
-  },
-};
+    experimental: {
+      outputFileTracingIncludes: [
+        "anchor/target/idl":["./votingdapp.json"],
+      ],
+    },
+  };
+  
+  export default nextConfig;
 
-export default nextConfig;
+  
