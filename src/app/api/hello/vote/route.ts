@@ -1,6 +1,6 @@
 import { ActionGetResponse, ActionPostRequest, createPostResponse } from "@solana/actions";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
-import { Voting } from "@/../anchor/target/types/voting";
+import { Votingdapp } from "@/../anchor/target/types/votingdapp";
 import { BN, Program } from "@coral-xyz/anchor";
 
 export const ACTIONS_CORS_HEADERS = {
@@ -12,7 +12,7 @@ export const ACTIONS_CORS_HEADERS = {
 
 
 
-const IDL = require('@/../anchor/target/idl/voting.json');
+const IDL = require('@/../anchor/target/idl/votingdapp.json');
 
 //export const OPTIONS = GET;
 
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
 
   const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
-  const program: Program<Voting> = new Program(IDL, {connection});
+  const program: Program<Votingdapp> = new Program(IDL, {connection});
 
   const body: ActionPostRequest = await request.json(); 
   let voter;
