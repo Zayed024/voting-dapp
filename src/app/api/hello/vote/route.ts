@@ -21,18 +21,19 @@ export async function OPTIONS() {
 }
 
 export async function GET(request: NextRequest) {
-  const actionMetadata: ActionGetResponse = {
-    icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-57yiXRWKvpfpV_iGOt88doZ1r_rNAtaWSQ&s",
-    title: "Vote for your favorite candidate",
-    description: "Trump or Biden.",
-    label: "Vote",
-    links: {
-      actions: [
-        { label: "Vote for Trump", href: "/api/hello/vote?candidate=Trump" },
-        { label: "Vote for Biden", href: "/api/hello/vote?candidate=Biden" },
-      ],
-    },
-  };
+ const actionMetadata: ActionGetResponse = {
+  icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-57yiXRWKvpfpV_iGOt88doZ1r_rNAtaWSQ&s",
+  title: "Vote for your favorite candidate",
+  description: "Trump or Biden.",
+  label: "Vote",
+  links: {
+    actions: [
+      { type: "link", label: "Vote for Trump", href: "/api/hello/vote?candidate=Trump" },
+      { type: "link", label: "Vote for Biden", href: "/api/hello/vote?candidate=Biden" },
+    ],
+  },
+};
+
 
   return NextResponse.json(actionMetadata, { headers: ACTIONS_CORS_HEADERS });
 }
