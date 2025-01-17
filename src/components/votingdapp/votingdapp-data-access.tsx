@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { useCluster } from '../cluster/cluster-data-access';
 import { useAnchorProvider } from '../solana/solana-provider';
 import { useTransactionToast } from '../ui/ui-layout';
+import BN from 'bn.js';
 
 export function useVotingdappProgram() {
   const { connection } = useConnection();
@@ -32,22 +33,27 @@ export function useVotingdappProgram() {
 
   // Initialize a new poll
   const initializePoll = useMutation({
-    mutationKey: ['Poll', 'initialize', { cluster }],
-    mutationFn: (params: { pollId: number; description: string; pollStart: number; pollEnd: number }) => {
-      const { pollId, description, pollStart, pollEnd } = params;
-      const pollKeypair = Keypair.generate();
-      return program.methods
-        .initializePoll(pollId, description, pollStart, pollEnd)
-        .accounts({ poll: pollKeypair.publicKey, signer: provider.wallet.publicKey })
-        .signers([pollKeypair])
-        .rpc();
-    },
-    onSuccess: (signature) => {
-      transactionToast(signature);
-      return polls.refetch();
-    },
-    onError: () => toast.error('Failed to initialize poll'),
-  });
+  mutationKey: ['Poll', 'initialize', { cluster }],
+  mutationFn: (params: { pollId: number; description: string; pollStart: number; pollEnd: number }) => {
+    const { pollId, description, pollStart, pollEnd } = params;
+    const pollKeypair = Keypair.generate();
+    return program.methods
+      .initializePoll(
+        new BN(pollId), // Convert to BN
+        description,
+        new BN(pollStart), // Convert to BN
+        new BN(pollEnd) // Convert to BN
+      )
+      .accounts({ poll: pollKeypair.publicKey, signer: provider.wallet.publicKey })
+      .signers([pollKeypair])
+      .rpc();
+  },
+  onSuccess: (signature) => {
+    transactionToast(signature);
+    return polls.refetch();
+  },
+  onError: () => toast.error('Failed to initialize poll'),
+});
 
   // Initialize a new candidate
   const initializeCandidate = useMutation({
