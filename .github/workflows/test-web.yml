@@ -10,23 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # Step 1: Check out the code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.0.0
-          run_install: false
-
-      - name: Install Node.js
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: npm
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Build project
-        run: pnpm build
+      # Step 4: Run tests
+      - name: Run Tests
+        run: npm test
+
+      # Step 5: Build the production app
+      - name: Build Production App
+        run: npm run build
