@@ -73,7 +73,7 @@ export function useVotingdappProgram() {
           poll: pollPDA,
           signer: provider.wallet.publicKey, // Wallet signer
           systemProgram: SystemProgram.programId, // System program
-        })
+        } as any )
         .rpc();
     },
     onSuccess: (signature) => {
